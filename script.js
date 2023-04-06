@@ -1,8 +1,11 @@
+let playerScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
-  let number = Math.random() * 100;
-  if (number <= 33) {
+  let number = Math.floor(Math.random() * 3);
+  if (number === 0) {
     return 'Rock';
-  } else if (number <= 66) {
+  } else if (number === 1) {
     return 'Paper';
   } else {
     return 'Scissors';
@@ -79,6 +82,3 @@ function playGame() {
     console.log(roundResult);
   }
 }
-
-let playerScore = 0;
-let computerScore = 0;
