@@ -1,6 +1,9 @@
 let playerScore = 0;
 let computerScore = 0;
-let btns = document.querySelectorAll('.btn');
+const btns = document.querySelectorAll('.btn');
+let result = document.body.querySelector('.results > #result');
+let computer = document.body.querySelector('.results > #computer');
+let score = document.body.querySelector('.results > #score');
 let playerSelection;
 
 btns.forEach((btn) => {
@@ -42,52 +45,23 @@ function playRound(computerSelection, playerSelection) {
 }
 
 function playGame() {
-  let roundResult = playRound(
-    (computerSelection = getComputerChoice()),
-    playerSelection
-  );
+  let computerSelection = getComputerChoice();
+  let roundResult = playRound(computerSelection, playerSelection);
   if (roundResult === 'draw') {
-    console.log(
-      `A draw! Computer picked ${computerSelection}, 
-				Your score is: ${playerScore}, 
-				computer score is: ${computerScore}`
-    );
-    if (playerScore < 5 && computerScore < 5) {
-      playGame();
-    } else {
-      playerScore = 0;
-      computerScore = 0;
-      console.log('We have a winner!');
-    }
+    result.textContent = 'A draw!';
+    computer.textContent = `Computer picked ${computerSelection}`;
+    score.textContent = `Your score is: ${playerScore}, computer score is: ${computerScore}`;
   } else if (roundResult === 'computer-wins') {
     computerScore++;
-    console.log(
-      `You lose this one! Computer picked ${computerSelection}, 
-				Your score is: ${playerScore}, 
-				computer score is: ${computerScore}`
-    );
-    if (playerScore < 5 && computerScore < 5) {
-      playGame();
-    } else {
-      playerScore = 0;
-      computerScore = 0;
-      console.log('We have a winner!');
-    }
+    result.textContent = 'You lose this one!';
+    computer.textContent = `Computer picked ${computerSelection}`;
+    score.textContent = `Your score is: ${playerScore}, computer score is: ${computerScore}`;
   } else if (roundResult === 'player-wins') {
     playerScore++;
-    console.log(
-      `Good work! Computer picked ${computerSelection}, 
-				Your score is: ${playerScore}, 
-				computer score is: ${computerScore}`
-    );
-    if (playerScore < 5 && computerScore < 5) {
-      playGame();
-    } else {
-      playerScore = 0;
-      computerScore = 0;
-      console.log('We have a winner!');
-    }
+    result.textContent = 'Good work!';
+    computer.textContent = `Computer picked ${computerSelection}`;
+    score.textContent = `Your score is: ${playerScore}, computer score is: ${computerScore}`;
   } else {
-    console.log(roundResult);
+    result.textContent = roundResult;
   }
 }
