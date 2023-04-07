@@ -64,4 +64,9 @@ function playGame() {
   } else {
     result.textContent = roundResult;
   }
+  if (computerScore >= 5 || playerScore >= 5) {
+    playerScore = 0;
+    computerScore = 0;
+    result.textContent = 'We have a winner!';
+  }
 }
