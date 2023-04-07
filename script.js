@@ -1,5 +1,14 @@
 let playerScore = 0;
 let computerScore = 0;
+let btns = document.querySelectorAll('.btn');
+let playerSelection;
+
+btns.forEach((btn) => {
+  btn.addEventListener('click', (e) => {
+    playerSelection = e.target.textContent;
+    playGame();
+  });
+});
 
 function getComputerChoice() {
   let number = Math.floor(Math.random() * 3);
@@ -28,18 +37,16 @@ function playRound(computerSelection, playerSelection) {
   ) {
     return 'player-wins';
   } else {
-    return 'ERROR, pick only between "Rock", "Paper" and "Scissors"';
+    return "Invalid input. Please choose between 'Rock', 'Paper', and 'Scissors'.";
   }
 }
 
 function playGame() {
   let roundResult = playRound(
     (computerSelection = getComputerChoice()),
-    (playerSelection = prompt('Pick "Rock", "Paper" or "Scissors"', '...'))
+    playerSelection
   );
   if (roundResult === 'draw') {
-    playerScore + 0;
-    computerScore + 0;
     console.log(
       `A draw! Computer picked ${computerSelection}, 
 				Your score is: ${playerScore}, 
@@ -48,10 +55,11 @@ function playGame() {
     if (playerScore < 5 && computerScore < 5) {
       playGame();
     } else {
+      playerScore = 0;
+      computerScore = 0;
       console.log('We have a winner!');
     }
   } else if (roundResult === 'computer-wins') {
-    playerScore + 0;
     computerScore++;
     console.log(
       `You lose this one! Computer picked ${computerSelection}, 
@@ -61,11 +69,12 @@ function playGame() {
     if (playerScore < 5 && computerScore < 5) {
       playGame();
     } else {
+      playerScore = 0;
+      computerScore = 0;
       console.log('We have a winner!');
     }
   } else if (roundResult === 'player-wins') {
     playerScore++;
-    computerScore + 0;
     console.log(
       `Good work! Computer picked ${computerSelection}, 
 				Your score is: ${playerScore}, 
